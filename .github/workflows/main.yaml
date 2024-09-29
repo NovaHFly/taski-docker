@@ -147,14 +147,11 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-        script: |
-          cd projects/taski
-          sudo docker compose -f docker-compose.production.yaml pull
-          sudo docker compose -f docker-compose.production.yaml down
-          sudo docker compose -f docker-compose.production.yaml up -d
-          sudo docker compose -f docker-compose.production.yaml exec backend python manage.py migrate
-          sudo docker compose -f docker-compose.production.yaml exec backend python manage.py collectstatic
-          sudo docker compose -f docker-compose.production.yaml exec backend cp -r /app/collected_static/. /backend_static/static/
-
-          
-
+          script: |
+            cd projects/taski
+            sudo docker compose -f docker-compose.production.yaml pull
+            sudo docker compose -f docker-compose.production.yaml down
+            sudo docker compose -f docker-compose.production.yaml up -d
+            sudo docker compose -f docker-compose.production.yaml exec backend python manage.py migrate
+            sudo docker compose -f docker-compose.production.yaml exec backend python manage.py collectstatic
+            sudo docker compose -f docker-compose.production.yaml exec backend cp -r /app/collected_static/. /backend_static/static/
